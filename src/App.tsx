@@ -1,4 +1,5 @@
 import Form from "./componets/Form"
+import { useState } from "react"
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
       </header>
 
       <section className="bg-lime-500 py-20 px-5">
-        <div className="max-w-2/3 mx-auto">
+        <div className="max-w-1/2 mx-auto">
           <Form />
         </div>
 
