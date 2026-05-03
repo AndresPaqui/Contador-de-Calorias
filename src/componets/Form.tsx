@@ -1,14 +1,36 @@
-import { useState, type ChangeEvent } from "react"
+import { /* useEffect */ useState, type ChangeEvent, type Dispatch, type SubmitEvent } from "react"
 import { categories } from "../data/categories"
 import type { Activity } from "../types";
+import type { ActivityActions, ActivityState, } from "../reducers/activityReducer";
 
-export default function Form() {
-    const [activity, setActivity] = useState<Activity>({
-        category: 1,
-        activityName: '',
-        calories: 0,
-    });
+type FormProps = { //Declaramos el type de dispatch que es un Prop (propiedad de useReduce)
+    dispatch: Dispatch<ActivityActions> //Dispatch (indica que es la funcion dispatch), ActivityActions es el type que importamos desde activityReducer.ts 
+    //Que contiene los types (nombres de las actividades) y payload (nombre referencial del dato alamacenar y el tipo de dato)
+    state: ActivityState
+}
 
+const initialState = {
+    category: 1,
+    activityName: '',
+    calories: 0,
+}
+
+export default function Form({ dispatch, state /* Importamos dispatch desde el App.tsx */ }: FormProps) {
+    const [activity, setActivity] = useState<Activity>(initialState);
+
+    //Aqui se muestra como mostrar el contenido de state.activities en consola
+    //donde nos toca validar que al dar al boton el cambio en el state no es instantaneo
+    //Es decir si tratamos de mandar a consola el state al momento de dar click al boton
+    //No hara ningun efecto, ya que el state se actualizara unos milisegundos despues
+    //Se necesita un useEffect para que mande a consola cada vez que el state cambie
+    //Y un if para evitar que al arrancar el programa no crahee por arreglo vacio
+    /*     useEffect(() => { 
+            if (state?.activities && state.activities.length > 0) {
+    
+                console.log(state.activities)
+            }
+    
+        }, [state]) */
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement, HTMLSelectElement> | ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
 
@@ -18,7 +40,6 @@ export default function Form() {
             ...activity,
             [e.target.id]: isNumberField ? +e.target.value : e.target.value
         })
-
     }
 
     const isValidActivity = () => {
@@ -27,9 +48,23 @@ export default function Form() {
         return activityName.trim() !== '' && calories > 0
     }
 
+    const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        dispatch({ //Usamos el dispatch que tragimos desde App.tsx que va mandar a llamar al type de "save-activity"
+            type: 'save-activity', //Actividad a realizar
+            payload: { newActivity: activity } // newActiviti el nombre, activity el nombre del state que declaramos el objeto de tipo activity
+        })
+
+        setActivity(initialState)
+
+    }
+
+
     return (
         <form //Inicio del formulario
             className="space-y-5 bg-white shadow p-10 rounded-lg"
+            onSubmit={handleSubmit}
         >
             <div className="grid grid-cols-1 gap-3"> //Categoria de la actividad Ejercicio o comida
                 <label htmlFor="category" className="font-bold">Categoria: </label>
@@ -93,6 +128,6 @@ export default function Form() {
                 value={activity.category === 1 ? 'Guarda Comida' : 'Guaradar Ejercicio'}
                 disabled={!isValidActivity()}
             />
-        </form>
+        </form >
     )
 }
