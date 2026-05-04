@@ -1,21 +1,22 @@
 import { /* useEffect */ useState, type ChangeEvent, type Dispatch, type SubmitEvent } from "react"
+import { v4 as uuidV4 } from "uuid";
 import { categories } from "../data/categories"
 import type { Activity } from "../types";
-import type { ActivityActions, ActivityState, } from "../reducers/activityReducer";
+import type { ActivityActions } from "../reducers/activityReducer";
 
 type FormProps = { //Declaramos el type de dispatch que es un Prop (propiedad de useReduce)
     dispatch: Dispatch<ActivityActions> //Dispatch (indica que es la funcion dispatch), ActivityActions es el type que importamos desde activityReducer.ts 
     //Que contiene los types (nombres de las actividades) y payload (nombre referencial del dato alamacenar y el tipo de dato)
-    state: ActivityState
 }
 
-const initialState = {
+const initialState : Activity = {
+    id: uuidV4(),
     category: 1,
     activityName: '',
     calories: 0,
 }
 
-export default function Form({ dispatch, state /* Importamos dispatch desde el App.tsx */ }: FormProps) {
+export default function Form({ dispatch /* Importamos dispatch desde el App.tsx */ }: FormProps) {
     const [activity, setActivity] = useState<Activity>(initialState);
 
     //Aqui se muestra como mostrar el contenido de state.activities en consola
@@ -48,15 +49,18 @@ export default function Form({ dispatch, state /* Importamos dispatch desde el A
         return activityName.trim() !== '' && calories > 0
     }
 
-    const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => { //Funcion para manejar el submit del formulario
+        e.preventDefault(); //Evita que se recargue la pagina al dar click al boton de submit, esto es importante para evitar perder el state y que el programa funcione correctamente
 
-        dispatch({ //Usamos el dispatch que tragimos desde App.tsx que va mandar a llamar al type de "save-activity"
-            type: 'save-activity', //Actividad a realizar
-            payload: { newActivity: activity } // newActiviti el nombre, activity el nombre del state que declaramos el objeto de tipo activity
+        dispatch({ //Usamos el dispatch que tragimos desde App.tsx que va mandar a llamar al type de "save-activity" //que es el que se encarga de guardar la actividad en el state global
+            type: 'save-activity', //Actividad a realizar //en este caso guardar la actividad
+            payload: { newActivity: activity } // newActiviti el nombre, activity el nombre del state que declaramos el objeto de tipo activity //que contiene los datos a guardar en el state global, esto es lo que se va mandar al reducer para actualizar el state global
         })
 
-        setActivity(initialState)
+        setActivity({ 
+            ...initialState, //Reseteamos el formulario al enviar la actividad, esto es opcional pero mejora la experiencia de usuario
+            id: uuidV4() //Generamos un nuevo id cada vez que se envie el formulario para evitar duplicados
+        })
 
     }
 

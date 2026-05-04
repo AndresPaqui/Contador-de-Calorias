@@ -1,5 +1,6 @@
 import { useReducer } from "react"
 import Form from "./componets/Form"
+import ActivityList from "./componets/ActivityList"
 import { activityReducer, initialState } from "./reducers/activityReducer"
 
 
@@ -15,11 +16,10 @@ function App() {
   //dispatch (se lo puede nombrar como se quiera se recomienda dispatch para no perder el hilo)
   //dicho dispatch es una funcion especial que nos permite llamar al useReducer para ejecutar las acciones declaradas en el reducer previo
 
-
   return (
     <>
-      <header className="bg-lime-600 py-3">
-        <div className="max-w-2/3 mx-auto flex justify-between items-center">
+      <header className="bg-lime-600 py-3 px-5">
+        <div className="max-w-4xl mx-auto flex justify-between items-center">
           <h1 className="text-center text-lg font-bold text-white uppercase">
             Contador de calorias
           </h1>
@@ -32,13 +32,22 @@ function App() {
       </header>
 
       <section className="bg-lime-500 py-20 px-5">
-        <div className="max-w-1/2 mx-auto">
+        <div className="max-w-4xl mx-auto">
           <Form
             dispatch={dispatch} //pasamos la propiedad de dispatch para poder usarlo en el Form
-            state={state}
           />
         </div>
 
+      </section>  
+
+      <section className="py-20 px-20 grid gap-10 max-w-4xl mx-auto">
+        <div>
+          <ActivityList
+          
+          activities ={state.activities}
+
+          />
+        </div>
       </section>
     </>
   )
