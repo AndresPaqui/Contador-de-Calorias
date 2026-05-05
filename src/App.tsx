@@ -34,7 +34,8 @@ function App() {
       <section className="bg-lime-500 py-20 px-5">
         <div className="max-w-4xl mx-auto">
           <Form
-            dispatch={dispatch} //pasamos la propiedad de dispatch para poder usarlo en el Form
+            dispatch={dispatch} //pasamos dispatch para poder usarlo en el Form
+            state = {state} //pasamos el state como prop para usarlo en el Form
           />
         </div>
 
@@ -45,6 +46,7 @@ function App() {
           <ActivityList
           
           activities ={state.activities}
+          dispatch = {dispatch}
 
           />
         </div>

@@ -1,16 +1,18 @@
 import type { Activity } from "../types"
 
 export type ActivityState = {
-    activities: Activity[]
+    activities: Activity[],
+    activeId: Activity['id']
 }
 
 export type ActivityActions = /* Type es el nombre de la actividad en este caso guaradar actividad payload son los datos que se van almacenar, newActivity es el nombre del o los datos (se hace para saber a que hcae referencia) y Activity es el tipo de dato como si fuera un int, double, etc*/
-    { type: 'save-activity', payload: { newActivity: Activity } }
-
+    { type: 'save-activity', payload: { newActivity: Activity } } |
+    { type: 'set-activeId', payload: { id: Activity['id']}}
 
 
 export const initialState: ActivityState = {
-    activities: []
+    activities: [],
+    activeId: ''
 }
 
 export const activityReducer = (
@@ -20,17 +22,29 @@ export const activityReducer = (
     //initialState es el state a guardar en "state" esto nos permite acceder a los diferentes states definidos en initialState
     //con la propiedad state.activities para modificar dicho state
 
-    if (action.type === 'save-activity') {
-        //Este codigo se va ejecutar si save activity fue quien altero el state
-        //Este codigo va manejar la logica para actualizar el state de actividades (activities[])
+    switch (action.type) {
+        case 'save-activity':
 
-        return {
+            let updatedActivities : Activity[] = []
+            if(state.activeId) {
+                updatedActivities = state.activities.map( activity => activity.id === state.activeId ? action.payload.newActivity : activity)
+                activedId: ''
+            } else {
+                updatedActivities = [...state.activities, action.payload.newActivity]
+            }
+
+
+            return {
             ...state,
-            activities: [...state.activities, action.payload.newActivity]
-        }
+            activities: updatedActivities,
+            }
+        case 'set-activeId':
 
-
+            return {
+            ...state,
+            activeId: action.payload.id
+            }
+        default:
+            return state;
     }
-
-    return state;
 }
