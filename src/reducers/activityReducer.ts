@@ -7,7 +7,9 @@ export type ActivityState = {
 
 export type ActivityActions = /* Type es el nombre de la actividad en este caso guaradar actividad payload son los datos que se van almacenar, newActivity es el nombre del o los datos (se hace para saber a que hcae referencia) y Activity es el tipo de dato como si fuera un int, double, etc*/
     { type: 'save-activity', payload: { newActivity: Activity } } |
-    { type: 'set-activeId', payload: { id: Activity['id']}}
+    { type: 'set-activeId', payload: { id: Activity['id'] } } |
+    { type: 'delete-activity', payload: { id: Activity['id'] } }
+
 
 
 export const initialState: ActivityState = {
@@ -28,6 +30,7 @@ export const activityReducer = (
             let updatedActivities : Activity[] = []
             if(state.activeId) {
                 updatedActivities = state.activities.map( activity => activity.id === state.activeId ? action.payload.newActivity : activity)
+
             } else {
                 updatedActivities = [...state.activities, action.payload.newActivity]
             }
@@ -41,8 +44,14 @@ export const activityReducer = (
         case 'set-activeId':
 
             return {
-            ...state,
-            activeId: action.payload.id
+                ...state,
+                activeId: action.payload.id
+            }
+        case 'delete-activity':
+
+            return {
+                ...state,
+                activities: state.activities.filter(activity => activity.id !== action.payload.id)
             }
         default:
             return state;
