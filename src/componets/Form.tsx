@@ -1,4 +1,4 @@
-import {  useEffect,  useState, type ChangeEvent, type Dispatch, type SubmitEvent } from "react"
+import { useEffect, useState, type ChangeEvent, type Dispatch, type SubmitEvent } from "react"
 import { v4 as uuidV4 } from "uuid";
 import { categories } from "../data/categories"
 import type { Activity } from "../types";
@@ -10,7 +10,7 @@ type FormProps = { //Declaramos el type de dispatch que es un Prop (propiedad de
     state: ActivityState
 }
 
-const initialState : Activity = {
+const initialState: Activity = {
     id: uuidV4(),
     category: 1,
     activityName: '',
@@ -35,10 +35,10 @@ export default function Form({ dispatch, state /* Importamos dispatch y state de
         }, [state]) */
 
     useEffect(() => {
-        if(state.activeId) {
-            const selectdActivity = state.activities.filter( stateActivity => stateActivity.id === state.activeId) [0]
+        if (state.activeId) {
+            const selectdActivity = state.activities.filter(stateActivity => stateActivity.id === state.activeId)[0]
 
-            setActivity(selectdActivity) 
+            setActivity(selectdActivity)
         }
 
     }, [state.activeId])
@@ -67,8 +67,8 @@ export default function Form({ dispatch, state /* Importamos dispatch y state de
             payload: { newActivity: activity } // newActiviti el nombre, activity el nombre del state que declaramos el objeto de tipo activity //que contiene los datos a guardar en el state global, esto es lo que se va mandar al reducer para actualizar el state global
         })
 
-        
-        setActivity({ 
+
+        setActivity({
             ...initialState, //Reseteamos el formulario al enviar la actividad, esto es opcional pero mejora la experiencia de usuario
             id: uuidV4() //Generamos un nuevo id cada vez que se envie el formulario para evitar duplicados
         })

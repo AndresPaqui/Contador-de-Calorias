@@ -35,18 +35,18 @@ function App() {
         <div className="max-w-4xl mx-auto">
           <Form
             dispatch={dispatch} //pasamos dispatch para poder usarlo en el Form
-            state = {state} //pasamos el state como prop para usarlo en el Form
+            state={state} //pasamos el state como prop para usarlo en el Form
           />
         </div>
 
-      </section>  
+      </section>
 
       <section className="py-20 px-20 grid gap-10 max-w-4xl mx-auto">
         <div>
           <ActivityList
-          
-          activities ={state.activities}
-          dispatch = {dispatch}
+
+            activities={state.activities}
+            dispatch={dispatch}
 
           />
         </div>
