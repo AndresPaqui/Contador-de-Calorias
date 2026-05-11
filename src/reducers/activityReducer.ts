@@ -28,7 +28,6 @@ export const activityReducer = (
             let updatedActivities : Activity[] = []
             if(state.activeId) {
                 updatedActivities = state.activities.map( activity => activity.id === state.activeId ? action.payload.newActivity : activity)
-                activedId: ''
             } else {
                 updatedActivities = [...state.activities, action.payload.newActivity]
             }
@@ -37,6 +36,7 @@ export const activityReducer = (
             return {
             ...state,
             activities: updatedActivities,
+            activeId: ''
             }
         case 'set-activeId':
 
