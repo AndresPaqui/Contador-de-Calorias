@@ -88,6 +88,29 @@ Se modifico la actividad "save-activity".
 
 ### Mensaje cuaando no hay ni comidas ni actividades agregado
 
+# Aplicando local storage 11 may 2026
+
+### Uso de useEffect
+Para aplicar local storage se hizo uso de un useEffect en el App.tsx
+
+- El useEffect se activa cada que se de un cambio en "state.activities"
+- El useEffect se encarga de guardar en localStorage las activities convertidas en string por la función JSON.stringify()
+
+## Modificaciones en el State Inicial 
+*Originalmenete el state de activities se iniciaba con arreglo vacio.* 
+
+- Se creo la funcion localStorageActivities con la variable "activities"
+
+#### variable activities
+- Es donde se guarda las actividades previamente seteadas desde el App.tsx. con la propiedad .getItem('activities')
+- *Valor de retorno:* Si la variable activities tiene datos se convierten en arreglo con JSON.parse(). Si la variable activities no contiene datos se retorna un arreglo vacio.
+
+#### InitialState
+*Originalmente activities dentro de initialState se iniciaba con un arreglo vacio*
+
+- Acutalmente se inicia con el valor retornado por la función localStorageActivities
+
+*LocalStorage agregado* 11 may 2026
 
 
 
