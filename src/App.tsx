@@ -19,8 +19,8 @@ function App() {
  
   return (
     <>
-      <header className="bg-lime-600 py-3 px-5">
-        <div className="max-w-4xl mx-auto flex justify-between items-center">
+      <header className="bg-lime-600 py-3 px-5 ">
+        <div className="max-w-4xl mx-auto flex justify-between items-center ">
           <h1 className="text-center text-lg font-bold text-white uppercase">
             Contador de calorias
           </h1>
@@ -56,7 +56,7 @@ function App() {
             </div>
       </section>
 
-      <section className="py-20 px-20 grid gap-10 max-w-4xl mx-auto">
+      <section className="py-10 px-10 sm:py-20 sm:px-20 grid gap-10 max-w-4xl mx-auto">
         <div>
           <ActivityList
 

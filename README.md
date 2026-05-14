@@ -129,6 +129,11 @@ Su funcionalidad es mostrar las calorias consumidas, quemadas y diferencia. Apor
 - Se llama al componente "CalorieDisplay" 3 veces en el "CalorieTracker"
 - Se le pasa como parametros cada funcion encargada de llevar la contabilidad de calorias
 
+# Adaptación completa a movil 
+
+- Se adapto la lista de actividades para que se vean de forma correcta en dispositivos moviles 
+
+# App Finalizada. 14 may 2026
 
 
 
