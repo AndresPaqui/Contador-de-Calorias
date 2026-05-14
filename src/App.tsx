@@ -6,6 +6,7 @@ import CalorieTracker from "./componets/CalorieTracker"
 
 
 function App() {
+
   //Referencia 
   const formularioRef = useRef<HTMLDivElement>(null); 
 
@@ -20,10 +21,15 @@ function App() {
   const scrollToForm = () => {
     formularioRef.current?.scrollIntoView({ behavior: 'smooth' })
 
-    setTimeout(() => {
-      const primerElementoForms = formularioRef.current?.querySelector('#activityName') as HTMLElement;
-      primerElementoForms.focus();
-    }, 300)
+    //Detectar si estamos en un dispisitivo mobile
+    const isMobile = window.innerWidth < 640
+    
+    if (!isMobile) {
+      setTimeout(() => {
+        const elementToFocus = formularioRef.current?.querySelector('#activityName') as HTMLElement;
+        elementToFocus?.focus();
+      }, 500);
+    }
   }
 
   const canRestarApp = () => useMemo(() => state.activities.length, [state.activities])

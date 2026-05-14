@@ -109,7 +109,7 @@ export default function Form({ dispatch, state /* Importamos dispatch y state de
             </div>
 
             <div className="grid grid-cols-1 gap-3"> {/* Actividad Realizada */}
-                <label htmlFor="activityName" className="font-bold">Actividad: </label>
+                <label htmlFor="activityName" className="font-bold ">Actividad: </label>
                 <input
                     type="text"
                     id="activityName"

@@ -129,7 +129,7 @@ Su funcionalidad es mostrar las calorias consumidas, quemadas y diferencia. Apor
 - Se llama al componente "CalorieDisplay" 3 veces en el "CalorieTracker"
 - Se le pasa como parametros cada funcion encargada de llevar la contabilidad de calorias
 
-# Adaptación completa a movil 
+# Adaptación completa a mobile
 
 - Se adapto la lista de actividades para que se vean de forma correcta en dispositivos moviles 
 
@@ -139,6 +139,11 @@ Su funcionalidad es mostrar las calorias consumidas, quemadas y diferencia. Apor
 
 - *Se aplico un scroll al momento de editar una actividad (se uso useRef):* Al editar un componente la pantalla realiza un scroll hasta el lugar del forms 
 - *Se aplico un focus al nombre de la actividad luego del scroll (se uso seTimeout para sincronizar el scroll con el focus):* Se uso queryselector para buscar el campo a editar por su Id
+
+## Bug en mobile solucionado
+El focus que se aplico previamente causaba en mobile causaba una animación brusca y apertura de teclado inesperada
+
+- *El focus solo se aplica para dispositivos con un ancho superio a 640:* De esta manera evitamos la apertura repentina del teclado en mobile y el bug de animación.
 
 
 
