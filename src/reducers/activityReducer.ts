@@ -18,7 +18,7 @@ const localStorageActivities = () : Activity[] => {
 }
 
 export const initialState: ActivityState = {
-    activities: localStorageActivities(),
+    activities: localStorageActivities(),   
     activeId: ''
 }
 
@@ -47,6 +47,7 @@ export const activityReducer = (
             activeId: ''
             }
         case 'set-activeId':
+                
 
             return {
                 ...state,

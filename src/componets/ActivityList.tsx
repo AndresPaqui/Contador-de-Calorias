@@ -6,10 +6,11 @@ import type { ActivityActions } from "../reducers/activityReducer";
 
 type ActivityListProps = {
     activities: Activity[],
-    dispatch: Dispatch<ActivityActions>
+    dispatch: Dispatch<ActivityActions>,
+    scrollToForm: () => void
 }
 
-export default function ActivityList({ activities, dispatch }: ActivityListProps) {
+export default function ActivityList({ activities, dispatch, scrollToForm }: ActivityListProps) {
 
     const categoryName = useMemo(() =>
         (category: Activity['category']) => (
@@ -52,12 +53,15 @@ export default function ActivityList({ activities, dispatch }: ActivityListProps
                                     name="editActivity"
                                     className=" cursor-pointer"
                                     
-                                    onClick={() => dispatch({
-                                        type: "set-activeId",
-                                        payload: {
-                                            id: activity.id
-                                        }
-                                    })}
+                                    onClick={() => {
+                                        dispatch({
+                                            type: "set-activeId",
+                                            payload: {
+                                                id: activity.id
+                                            }
+                                        })
+                                        scrollToForm();
+                                    }}
                                 >
                                     <PencilSquareIcon
                                         className="h-8 w-8 text-gray-800"

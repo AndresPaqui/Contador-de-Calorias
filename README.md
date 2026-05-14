@@ -135,6 +135,11 @@ Su funcionalidad es mostrar las calorias consumidas, quemadas y diferencia. Apor
 
 # App Finalizada. 14 may 2026
 
+## Ajustes visuales 14 may 2026
+
+- *Se aplico un scroll al momento de editar una actividad (se uso useRef):* Al editar un componente la pantalla realiza un scroll hasta el lugar del forms 
+- *Se aplico un focus al nombre de la actividad luego del scroll (se uso seTimeout para sincronizar el scroll con el focus):* Se uso queryselector para buscar el campo a editar por su Id
+
 
 
 

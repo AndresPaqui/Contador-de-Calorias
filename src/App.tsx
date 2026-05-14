@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useMemo } from "react"
+import { useReducer, useEffect, useMemo, useRef } from "react"
 import Form from "./componets/Form"
 import ActivityList from "./componets/ActivityList"
 import { activityReducer, initialState } from "./reducers/activityReducer"
@@ -6,14 +6,25 @@ import CalorieTracker from "./componets/CalorieTracker"
 
 
 function App() {
+  //Referencia 
+  const formularioRef = useRef<HTMLDivElement>(null); 
 
   //Creamos el useReducer con los parametros declarados en activityReducer, aqui solo instanciamos
   const [state, dispatch] = useReducer(activityReducer, initialState) 
 
-
   useEffect(() => {
     localStorage.setItem('activities', JSON.stringify(state.activities))
   }, [state.activities])
+
+  //Funcion scroll
+  const scrollToForm = () => {
+    formularioRef.current?.scrollIntoView({ behavior: 'smooth' })
+
+    setTimeout(() => {
+      const primerElementoForms = formularioRef.current?.querySelector('#activityName') as HTMLElement;
+      primerElementoForms.focus();
+    }, 300)
+  }
 
   const canRestarApp = () => useMemo(() => state.activities.length, [state.activities])
  
@@ -38,7 +49,10 @@ function App() {
         </div>
       </header>
 
-      <section className="bg-lime-500 py-20 px-5">
+      <section 
+        className="bg-lime-500 py-20 px-5"
+        ref={formularioRef}
+      >
         <div className="max-w-4xl mx-auto">
           <Form
             dispatch={dispatch} //pasamos dispatch para poder usarlo en el Form
@@ -60,8 +74,9 @@ function App() {
         <div>
           <ActivityList
 
-            activities={state.activities}
-            dispatch={dispatch}
+            activities= {state.activities}
+            dispatch = {dispatch}
+            scrollToForm = {scrollToForm}
 
           />
         </div>

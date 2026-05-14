@@ -76,6 +76,8 @@ export default function Form({ dispatch, state /* Importamos dispatch y state de
     }
 
 
+
+
     return (
         <form //Inicio del formulario
             className="space-y-5 bg-white shadow p-10 rounded-xl"
@@ -129,6 +131,7 @@ export default function Form({ dispatch, state /* Importamos dispatch y state de
                     className="border border-slate-300 rounded-lg p-2 w-full bg-white
                     outline-none focus:ring-2 focus:ring-lime-500 transition-all cursor-pointer text-center "
                     placeholder="Calorias. ej. 300 o 500"
+                    value={activity.calories === 0 ? '' : activity.calories}
                     onChange={handleChange}
                 />
             </div>
