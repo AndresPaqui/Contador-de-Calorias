@@ -81,7 +81,7 @@ export default function Form({ dispatch, state /* Importamos dispatch y state de
             className="space-y-5 bg-white shadow p-10 rounded-xl"
             onSubmit={handleSubmit}
         >
-            <div className="grid grid-cols-1 gap-3"> //Categoria de la actividad Ejercicio o comida
+            <div className="grid grid-cols-1 gap-3"> {/* Categoria de la actividad Ejercicio o comida */}
                 <label htmlFor="category" className="font-bold">Categoria: </label>
                 <select
                     className="border border-slate-300 p-2 rounded-lg w-full bg-white
@@ -106,7 +106,7 @@ export default function Form({ dispatch, state /* Importamos dispatch y state de
 
             </div>
 
-            <div className="grid grid-cols-1 gap-3"> //Actividad Realizada
+            <div className="grid grid-cols-1 gap-3"> {/* Actividad Realizada */}
                 <label htmlFor="activityName" className="font-bold">Actividad: </label>
                 <input
                     type="text"
@@ -120,7 +120,7 @@ export default function Form({ dispatch, state /* Importamos dispatch y state de
                 />
             </div>
 
-            <div className="grid grid-cols-1 gap-3"> //Calorias quemadas o sumadas, depende
+            <div className="grid grid-cols-1 gap-3"> {/* Calorias quemadas o sumadas, depende */}
                 <label htmlFor="calories" className="font-bold">Calorias: </label>
                 <input
                     type="number"

@@ -9,7 +9,7 @@ export type ActivityActions = /* Type es el nombre de la actividad en este caso 
     { type: 'save-activity', payload: { newActivity: Activity } } |
     { type: 'set-activeId', payload: { id: Activity['id'] } } |
     { type: 'delete-activity', payload: { id: Activity['id'] } } |
-    { type: 'reboot_activities', payload: { newActivity: Activity[] } }
+    { type: 'reboot_activities'}
 
 const localStorageActivities = () : Activity[] => {
     const activities = localStorage.getItem('activities')

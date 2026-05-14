@@ -1,7 +1,8 @@
-import { useReducer, useEffect } from "react"
+import { useReducer, useEffect, useMemo } from "react"
 import Form from "./componets/Form"
 import ActivityList from "./componets/ActivityList"
 import { activityReducer, initialState } from "./reducers/activityReducer"
+import CalorieTracker from "./componets/CalorieTracker"
 
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
   useEffect(() => {
     localStorage.setItem('activities', JSON.stringify(state.activities))
   }, [state.activities])
+
+  const canRestarApp = () => useMemo(() => state.activities.length, [state.activities])
  
   return (
     <>
@@ -23,16 +26,14 @@ function App() {
           </h1>
 
           <button 
-            className="text-white text-lg font-bold text-center uppercase  
-            bg-lime-950 p-3 rounded-b-2xl cursor-pointer hover:bg-lime-800"
+            className="text-white text-sm font-bold text-center uppercase  
+            bg-lime-950 p-3 rounded-2xl cursor-pointer hover:bg-lime-800 disabled:opacity-10 disabled:cursor-not-allowed"
+            disabled= {!canRestarApp()}
             onClick={() => dispatch({
-              type: 'reboot_activities',
-              payload: {
-                newActivity: state.activities
-              }
+              type: 'reboot_activities'
             })}
           >
-            Reiniciar
+            Reiniciar App
           </button>
         </div>
       </header>
@@ -45,6 +46,14 @@ function App() {
           />
         </div>
 
+      </section>
+
+      <section className="bg-gray-800 py-10">
+            <div className="max-w-4xl mx-auto">
+              <CalorieTracker
+                activities = {state.activities}
+              />
+            </div>
       </section>
 
       <section className="py-20 px-20 grid gap-10 max-w-4xl mx-auto">

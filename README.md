@@ -112,6 +112,25 @@ Para aplicar local storage se hizo uso de un useEffect en el App.tsx
 
 *LocalStorage agregado* 11 may 2026
 
+# Componente para mostrar el total de calorias 14 may 2026
+
+Se creo el componente "CalorieTracker"
+
+- Cuenta con 3 funciones encargadas de llevar la contabilidad de calorias consumidas, quemadas y diferencias
+
+## Componente para renderizar las calorias
+
+Se creo el componente "CalorieDisplay"
+
+Su funcionalidad es mostrar las calorias consumidas, quemadas y diferencia. Aportando asi reusabilidad al componente y evitando codigo repetido
+
+## Renderización
+
+- Se llama al componente "CalorieDisplay" 3 veces en el "CalorieTracker"
+- Se le pasa como parametros cada funcion encargada de llevar la contabilidad de calorias
+
+
+
 
 
 
